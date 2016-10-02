@@ -11,12 +11,15 @@ Atmosphere requires a server running PHP 5.6, a [Dark Sky API key](https://darks
   * weather.php: weather forecast template
   * error.php: error/404 template
   * alert.php: urgent weather alert template
-  * debug.php: debugging function (console.log)
-* **style.css** all noncritical stylings (critical items inlined)
-* **ig/**
+  * functions.php: debug(), formatTime()...
+* **style.css** below-the-fold stylings (most above inlined)
+* **ig/** (images)
   * attr/: attribution icons (used in footer)
-  * fvicns/
-  * wthr/
+  * fvicns/: dynamic favicons (mirrors location's current weather)
+  * wthr/: forecast icons (icon set created by me, inspired by iOS)
+    * sm/ & md/: downscaled versions for lower resolution displays
 
 ## Usage
 Insert your Dark Sky and Geolocation API keys at the top of index.php.
+
+(Size problem has been resolved: all pages are now under 10kB.)
