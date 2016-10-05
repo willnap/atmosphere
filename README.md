@@ -20,6 +20,8 @@ Atmosphere requires a server running PHP 5.6, a [Dark Sky API key](https://darks
     * sm/ & md/: downscaled versions for lower resolution displays
 
 ## Usage
-Insert your Dark Sky and Geolocation API keys at the top of index.php.
+Insert your Dark Sky and Geolocation API keys at the top of index.php
+OR
+Add "DARKSKY_KEY" and "GEOCODE_KEY" to your site's App Settings. "ERROR_CONTACT" may also be added, but is optional.
 
 (Size problem has been resolved: all pages are now under 10kB.)
