@@ -138,6 +138,8 @@
 
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+  <meta name="description" content="<?php echo $forecast->daily->summary; ?>" />
+  <meta property="og:image" content="<?php echo "https://" . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . "ig/fvicns/" . $favicon . ".png"; ?>" />
   <link rel="icon" href="<?php echo "ig/fvicns/" . $favicon . ".png"; ?>" type="image/png">
   <title><?php if ($valid) { echo "Atmosphere for " . $location; } else { echo "Error | Atmosphere"; } ?></title>
   <style>html,body{margin:0;padding:0;overflow-x:hidden;background-color:<?php echo $back_color ?>}body{font-family:-apple-system,Helvetica,Arial,sans-serif;color:#fff;text-align:center;width:100vw;max-width:100vw;min-height:100vh;padding:10px 0;background-image:linear-gradient(<?php echo $back_gradient; ?>)}<?php if ($units != null) { echo "#" . $units . "{ font-weight: bolder; }"; } ?></style>
