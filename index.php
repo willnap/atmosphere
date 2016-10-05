@@ -142,7 +142,7 @@
   <meta property="og:image" content="<?php echo "https://" . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . "ig/fvicns/" . $favicon . ".png"; ?>" />
   <link rel="icon" href="<?php echo "ig/fvicns/" . $favicon . ".png"; ?>" type="image/png">
   <title><?php if ($valid) { echo "Atmosphere for " . $location; } else { echo "Error | Atmosphere"; } ?></title>
-  <style>html,body{margin:0;padding:0;overflow-x:hidden;background-color:<?php echo $back_color ?>}body{font-family:-apple-system,Helvetica,Arial,sans-serif;color:#fff;text-align:center;width:100vw;max-width:100vw;min-height:100vh;padding:10px 0;background-image:linear-gradient(<?php echo $back_gradient; ?>)}<?php if ($units != null) { echo "#" . $units . "{ font-weight: bolder; }"; } ?></style>
+  <style>html,body{margin:0;padding:0;overflow-x:hidden;background-color:<?php echo $back_color ?>}body{font-family:-apple-system,"Segoe UI","Roboto","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;text-align:center;width:100vw;max-width:100vw;min-height:100vh;padding:10px 0;background-image:linear-gradient(<?php echo $back_gradient; ?>)}<?php if ($units != null) { echo "#" . $units . "{ font-weight: bolder; }"; } ?></style>
   <link rel="stylesheet" async type="text/css" href="style.css">
 </head>
 
