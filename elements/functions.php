@@ -26,13 +26,13 @@
     if (strpos($icon, "t-p-") !== false) {
       switch ($icon) {
         case "t-p-rain":
-          return '<img class="txt" alt="Chance of Rain" src="ig/wr/r-t.svg?" title="Chance of Rain">';
+          return '<img class="txt" alt="Chance of Rain" src="ig/wr/r-t.svg" title="Chance of Rain">';
         case "t-p-snow":
-          return '<img class="txt" alt="Chance of Snow" src="ig/wr/sw-t.svg?" title="Chance of Snow">';
+          return '<img class="txt" alt="Chance of Snow" src="ig/wr/sw-t.svg" title="Chance of Snow">';
         case 't-p-sleet':
-          return '<img class="txt" alt="Chance of Sleet" src="ig/wr/sw-t.svg?" title="Chance of Sleet">';
+          return '<img class="txt" alt="Chance of Sleet" src="ig/wr/sw-t.svg" title="Chance of Sleet">';
         default:
-          return '<img class="txt" alt="Chance of Precipitation" src="ig/wr/r-t.svg?" title="Chance of Precipitation">';
+          return '<img class="txt" alt="Chance of Precipitation" src="ig/wr/r-t.svg" title="Chance of Precipitation">';
       }
     }
     if ($class == "") { $class = null; }
@@ -94,12 +94,13 @@
     $out = "<img ";
     if ($class != null) { $out .= 'class="' . $class . '" '; }
     if ($alt != null) { $out .= 'alt="' . $alt . '" ';  }
-    // $out .= 'src="ig/wr/' . $icon . '.svg?"';
+    // $out .= 'src="ig/wr/' . $icon . '.svg"';
     if ($large) {
-      $out .= 'src="ig/wr/' . $icon . '.svg?" srcset="ig/wr/sm/' . $icon . '.png? 35w, ig/wr/md/' . $icon . '.png? 70w, ig/wr/' . $icon . '.svg? 80w"';
+      $out .= 'src="ig/wr/' . $icon . '.svg" srcset="ig/wr/sm/' . $icon . '.png 35w, ig/wr/md/' . $icon . '.png 70w, ig/wr/' . $icon . '.svg 80w"';
     } else {
-      $out .= 'src="ig/wr/sm/' . $icon . '.png?" srcset="ig/wr/sm/' . $icon . '.png? 35w, ig/wr/md/' . $icon . '.png? 70w, ig/wr/' . $icon . '.svg? 80w"';
+      $out .= 'src="ig/wr/sm/' . $icon . '.png" srcset="ig/wr/sm/' . $icon . '.png 35w, ig/wr/md/' . $icon . '.png 70w, ig/wr/' . $icon . '.svg 80w"';
     }
+    $out .= ' width="35px"';
     $out .= '>';
     return $out;
   }
@@ -131,7 +132,7 @@
       echo "<li>";
       echo '  <time>' . formatTime($time, 'g:i A') . '</time> ';
       echo '  ' . rain($forecast->hourly->data[$i]->precipProbability, true);
-      echo '  <img alt="' . $type . '" src="ig/wr/sm/' . $abbr_type . '.png" srcset="ig/wr/sm/' . $abbr_type . '.png? 35w, ig/wr/md/' . $abbr_type . '.png? 70w, ig/wr/' . $abbr_type . '.svg? 80w">';
+      echo '  <img alt="' . $type . '" src="ig/wr/sm/' . $abbr_type . '.png" srcset="ig/wr/sm/' . $abbr_type . '.png 35w, ig/wr/md/' . $abbr_type . '.png 70w, ig/wr/' . $abbr_type . '.svg 80w">';
       echo '  <span>' . $type . '</span>';
       echo "</li>";
     }
