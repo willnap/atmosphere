@@ -1,9 +1,21 @@
 <!doctype html>
 <?php
-  $DARKSKY_KEY = "";
-  $GEOCODE_KEY = "";
-  $ERROR_CONTACT = "error@atmosphere.li";
-  $DEBUG = False;
+  $DARKSKY_KEY = getenv('DARKSKY_KEY');
+  if ($DARKSKY_KEY == null) {
+    $DARKSKY_KEY = "";
+  }
+  $GEOCODE_KEY = getenv('GEOCODE_KEY');
+  if ($GEOCODE_KEY == null) {
+    $GEOCODE_KEY = "";
+  }
+  $ERROR_CONTACT = getenv('ERROR_CONTACT');
+  if ($ERROR_CONTACT == null) {
+    $ERROR_CONTACT = "error@atmosphere.li";
+  }
+  $DEBUG = getenv('DEBUG');
+  if ($DEBUG == null) {
+    $DEBUG = False;
+  }
 
   $location = htmlspecialchars($_GET["loc"]);
   $ip_address = $_SERVER['REMOTE_ADDR'];
