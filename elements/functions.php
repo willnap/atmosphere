@@ -20,6 +20,7 @@
     global $time;
     global $lang;
     global $locale24;
+    $format = str_replace("%-l", "%I", $format);
     if ($locale24 or ($time == "24")) {
       $format = str_replace("%I", "%-k", $format);
       $format = str_replace("%l", "%-k", $format);
