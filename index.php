@@ -137,7 +137,7 @@
   }
 
   // Windows error testing
-  echo formatTime($forecast_time, '%-l:%M %p');
+  // echo formatTime($forecast_time, '%-l:%M %p');
   echo formatTime($forecast_time, '%I:%M %p');
 
 ?>
