@@ -9,7 +9,7 @@
   function rain($probability, $return) {
     $probability = $probability * 100;
     if ($probability > 5) {
-      return "<span class='r'>{$probability}%</span> ";
+      return "<span class='r'>" . __($probability . "%") . "</span> ";
     } else if ($return) {
       return "<span class='r h'>&nbsp;</span>";
     }
@@ -17,22 +17,33 @@
 
   function formatTime($unix, $format) {
     global $forecast_timezone;
-    $time = new DateTime("@" . $unix);
-    $time->setTimeZone(new DateTimeZone($forecast_timezone));
-    return strval($time->format($format));
+    global $time;
+    global $lang;
+    global $locale24;
+    if ($locale24 or ($time == "24")) {
+      $format = str_replace("%I", "%-k", $format);
+      $format = str_replace("%l", "%-k", $format);
+      $format = str_replace("%-l", "%-k", $format);
+      $format = str_replace("%p", "", $format);
+      $format = str_replace("%P", "", $format);
+      $time = "24";
+    }
+    date_default_timezone_set($forecast_timezone);
+    $formatted_time = strftime($format, $unix);
+    return __($formatted_time);
   }
 
   function image($class, $alt, $icon, $sunrise, $sunset, $large) {
     if (strpos($icon, "t-p-") !== false) {
       switch ($icon) {
         case "t-p-rain":
-          return '<img class="txt" alt="Chance of Rain" src="ig/wr/r-t.svg" title="Chance of Rain">';
+          return '<img class="txt" alt="' . __("Chance of Rain") . '" src="ig/wr/r-t.svg?" title="' . __("Chance of Rain") . '">';
         case "t-p-snow":
-          return '<img class="txt" alt="Chance of Snow" src="ig/wr/sw-t.svg" title="Chance of Snow">';
+          return '<img class="txt" alt="' . __("Chance of Snow") . '" src="ig/wr/sw-t.svg?" title="' . __("Chance of Snow") . '">';
         case 't-p-sleet':
-          return '<img class="txt" alt="Chance of Sleet" src="ig/wr/sw-t.svg" title="Chance of Sleet">';
+          return '<img class="txt" alt="' . __("Chance of Sleet") . '" src="ig/wr/sw-t.svg?" title="' . __("Chance of Sleet") . '">';
         default:
-          return '<img class="txt" alt="Chance of Precipitation" src="ig/wr/r-t.svg" title="Chance of Precipitation">';
+          return '<img class="txt" alt="' . __("Chance of Precipitation") . '" src="ig/wr/r-t.svg?" title="' . __("Chance of Precipitation") . '">';
       }
     }
     if ($class == "") { $class = null; }
@@ -100,13 +111,13 @@
     } else {
       $out .= 'src="ig/wr/sm/' . $icon . '.png" srcset="ig/wr/sm/' . $icon . '.png 35w, ig/wr/md/' . $icon . '.png 70w, ig/wr/' . $icon . '.svg 80w"';
     }
-    $out .= ' width="35px"';
-    $out .= '>';
+    $out .= ' width="35px">';
     return $out;
   }
 
   function addLimbTangencies($i) {
     global $forecast;
+    global $forecast_time;
     $time_1 = $forecast->hourly->data[$i]->time;
     $time_2 = $forecast->hourly->data[$i+1]->time;
     $sunrise_1 = $forecast->daily->data[0]->sunriseTime;
@@ -116,16 +127,19 @@
     if ( ((($sunrise_1 - $time_1) > 0) and (($sunrise_1 - $time_2) < 0)) or ((($sunrise_2 - $time_1) > 0) and (($sunrise_2 - $time_2) < 0)) ) {
       // SUNRISE
       $valid = true;
-      $type = "Sunrise";
+      $type = __("Sunrise");
       $abbr_type = "sr";
       if ((($sunrise_1 - $time_1) > 0) and (($sunrise_1 - $time_2) < 0)) { $time = $forecast->daily->data[0]->sunriseTime; } else { $time = $forecast->daily->data[1]->sunriseTime; }
     } else if ( ((($sunset_1 - $time_1) > 0) and (($sunset_1 - $time_2) < 0)) or ((($sunset_2 - $time_1) > 0) and (($sunset_2 - $time_2) < 0)) ) {
       // SUNSET
       $valid = true;
-      $type = "Sunset";
+      $type = __("Sunset");
       $abbr_type = "ss";
       if ((($sunset_1 - $time_1) > 0) and (($sunset_1 - $time_2) < 0)) { $time = $forecast->daily->data[0]->sunsetTime; } else { $time = $forecast->daily->data[1]->sunsetTime; }
     } else {
+      $valid = false;
+    }
+    if ($forecast_time >= $time) {
       $valid = false;
     }
     if ($valid) {
@@ -135,6 +149,35 @@
       echo '  <img alt="' . $type . '" src="ig/wr/sm/' . $abbr_type . '.png" srcset="ig/wr/sm/' . $abbr_type . '.png 35w, ig/wr/md/' . $abbr_type . '.png 70w, ig/wr/' . $abbr_type . '.svg 80w">';
       echo '  <span>' . $type . '</span>';
       echo "</li>";
+    }
+  }
+
+  function 🍪($name, $default) {
+    global $$name;
+    if (isset($_POST[$name])) {
+      $$name = $_POST[$name];
+      setcookie($name, $$name, time()+31556926, "/", "." . $_SERVER[HTTP_HOST]);
+    } else if ($_COOKIE[$name] != null) {
+      $$name = $_COOKIE[$name];
+      setcookie($name, $$name, time()+31556926, "/", "." . $_SERVER[HTTP_HOST]);
+    } else {
+      $$name = $default;
+    }
+  }
+
+  function __($message) {
+    global $locale;
+    global $lang;
+    if ($locale[$message] != null) {
+      return $locale[$message];
+    } else {
+      if ($lang == "ar") {
+        $west = array("0","1","2","3","4","5","6","7","8","9");
+        $east = array("٠","١","٢","٣","٤","٥","٦","٧","٨","٩");
+        $message = str_replace($west, $east, $message);
+        $message = str_replace("%", "٪", $message);
+      }
+      return $message;
     }
   }
 
