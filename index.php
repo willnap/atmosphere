@@ -1,4 +1,3 @@
-<!doctype html>
 <?php
   $DARKSKY_KEY = getenv('DARKSKY_KEY');
   if ($DARKSKY_KEY == null) {
@@ -20,6 +19,17 @@
   $location = htmlspecialchars($_GET["loc"]);
   $ip_address = $_SERVER['REMOTE_ADDR'];
   include 'elements/functions.php';
+  🍪("units", "us");
+  🍪("lang", "en");
+  include 'locale/' . $lang . '.php';
+  if ($locale_php != null) {
+    setlocale(LC_TIME, $locale_php . ".UTF-8");
+  }
+  if ($locale24) {
+    setcookie("time", "24", time()+31556926, "/", "." . $_SERVER[HTTP_HOST]);
+  } else {
+    🍪("time", "12");
+  }
   if ($location != null) {
     debug("Path: User Input");
   } else if (preg_match('/spider|bot/', $_SERVER[HTTP_USER_AGENT])) {
@@ -51,14 +61,15 @@
   }
 
   $location = str_replace(" ", "_", htmlspecialchars($location));
-  $geo_info = json_decode(file_get_contents("https://maps.google.com/maps/api/geocode/json?address={$location}&key={$GEOCODE_KEY}"));
+  $geo_info = json_decode(file_get_contents("https://maps.google.com/maps/api/geocode/json?address={$location}&key={$GEOCODE_KEY}&language={$locale_geo}"));
   if (($geo_info != null) and ($geo_info->status == "OK")) {
     $location_coords = $geo_info->results[0]->geometry->location->lat . "," . $geo_info->results[0]->geometry->location->lng;
-    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?units={$units}"));
+    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?lang={$lang}&units={$units}"));
     $location = str_replace(", USA", "", $geo_info->results[0]->formatted_address);
+    $location = str_replace(", EE. UU.", "", $geo_info->results[0]->formatted_address);
   } else if ($location_coords != null) {
     $location = str_replace("_", " ", $location);
-    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?units={$units}"));
+    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?lang={$lang}&units={$units}"));
   } else {
     $location = str_replace("_", " ", $location);
     $valid = False;
@@ -66,7 +77,7 @@
   if (($forecast != null) and ($forecast->currently->icon != "")) {
     $valid = True;
   } else {
-    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?units={$units}"));
+    $forecast = json_decode(file_get_contents("https://api.darksky.net/forecast/{$DARKSKY_KEY}/{$location_coords}?lang={$lang}&units={$units}"));
     if (($forecast != null) and ($forecast->currently->icon != "")) {
       debug("Second Try");
       $valid = True;
@@ -134,22 +145,23 @@
   }
 
 ?>
-<html lang="en">
+<!doctype html>
+<html lang="<?php echo $lang; ?>"<?php if ($localeRTL) { echo ' dir="rtl"'; } ?>>
 
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
   <meta name="description" content="<?php echo $forecast->daily->summary; ?>" />
-  <meta property="og:image" content="<?php echo "https://" . $_SERVER[HTTP_HOST] . $_SERVER[REQUEST_URI] . "ig/fvicns/" . $favicon . ".png"; ?>" />
+  <meta property="og:image" content="<?php echo "https://" . $_SERVER[HTTP_HOST] . "ig/fvicns/" . $favicon . ".png"; ?>" />
   <link rel="icon" href="<?php echo "ig/fvicns/" . $favicon . ".png"; ?>" type="image/png">
-  <title><?php if ($valid) { echo "Atmosphere for " . $location; } else { echo "Error | Atmosphere"; } ?></title>
+  <title><?php if ($valid) { echo __("Atmosphere for ") . $location; } else { echo __("Error") . " | Atmosphere"; } ?></title>
   <style>html,body{margin:0;padding:0;overflow-x:hidden;background-color:<?php echo $back_color ?>}body{font-family:-apple-system,"Segoe UI","Roboto","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;text-align:center;width:100vw;max-width:100vw;min-height:100vh;padding:10px 0;background-image:linear-gradient(<?php echo $back_gradient; ?>)}<?php if ($units != null) { echo "#" . $units . "{ font-weight: bolder; }"; } ?></style>
-  <link rel="stylesheet" async type="text/css" href="style.css">
+  <link rel="stylesheet" async type="text/css" href="style.css"><?php if ($localeRTL) { echo "\n<style>#now .rgt, .dly .lft{text-align:right}.dly .rgt{text-align:left;}b{margin-right:0;margin-left:10px;min-width:4%;}.dly .r{margin-right:0;margin-left:15%}</style>\n"; } ?>
 </head>
 
 <body>
   <form>
-    <span>select to change city</span><br>
-    <input type="text" placeholder="Enter a Location" value="<?php echo $location; ?>" name="loc" onfocus="shwL()" onblur="hdL()" aria-label="Change Location">
+    <span><?php echo __("select to change city"); ?></span><br>
+    <input type="text" placeholder="<?php echo __("Enter a Location"); ?>" value="<?php echo $location; ?>" name="loc" onfocus="shwL()" onblur="hdL()" aria-label="<?php echo __("Change Location"); ?>">
   </form>
   <span id="al"></span>
   <?php
@@ -159,13 +171,8 @@
       include 'elements/error.php';
     }
   ?>
-  <div id="ftr">
-    <a href="https://darksky.net/dev/"><img alt="Dark Sky" src="ig/attr/ds.svg?" title="Powered by Dark Sky" height="38px"></a>
-    <a href="https://willnapier.co"><img alt="WN" src="ig/attr/wn.svg?" title="Created by Will Napier" height="30px"></a>
-    <a href="https://github.com/willnap"><img alt="Github" src="ig/attr/gh.svg?" title="Source on Github" height="38px"></a>
-    <form id="uts" method="post"><button type="submit" name="units" value="us" id="us">US</button><button type="submit" name="units" value="ca" id="ca">CA</button><button type="submit" name="units" value="uk" id="uk">UK</button><button type="submit" name="units" value="si" id="si">SI</button></form>
-  </div>
-  <script>function shwL(){al.classList.remove("h")}function hdL(){window.setTimeout(LTo,1e3)}function LTo(){al.classList.add("h")}function loc(){function a(a){location="https://"+window.location.hostname+window.location.pathname+"?loc="+a.coords.latitude+","+a.coords.longitude}function b(){al.innerHTML="Search Error"}return navigator.geolocation?(al.innerHTML="Locating...",void navigator.geolocation.getCurrentPosition(a,b)):void(al.innerHTML="Not Supported")}function updateClock(){var a=new Date,b=a.getMinutes(),c=a.getHours();b<10?b="0"+b:c!=prevLocHour&&document.location.reload(!0),timeStr=hour+":"+b+" "+ampm,b!=prevMin&&(clock.innerHTML=timeStr),prevMin=b;setTimeout(updateClock,1e3)}var al=document.getElementById("al");if(al.classList.add("h"),navigator.geolocation&&(al.innerHTML='<button onclick="loc()">Current Location</button>'),document.getElementById("ct")){var clock=document.getElementById("ct"),time=clock.innerHTML,timeItems=time.split(" "),ampm=timeItems[1];timeItems=timeItems[0].split(":");var prevMin=timeItems[1],hour=timeItems[0],timeStr=hour+":"+prevMin+" "+ampm;clock.innerHTML=timeStr;var t=new Date,prevLocHour=t.getHours();updateClock()}</script>
+  <?php $show_settings = true; include 'elements/footer.php'; ?>
+  <script>function shwL(){al.classList.remove("h")}function hdL(){window.setTimeout(LTo,1e3)}function LTo(){al.classList.add("h")}function loc(){function a(a){location="https://"+window.location.hostname+window.location.pathname+"?loc="+a.coords.latitude+","+a.coords.longitude}function b(){al.innerHTML="<?php echo __("Search Error"); ?>"}return navigator.geolocation?(al.innerHTML="<?php echo __("Locating..."); ?>",void navigator.geolocation.getCurrentPosition(a,b)):void(al.innerHTML="<?php echo __("Not Supported"); ?>")}function updateClock(){var a=new Date,ba=a.getMinutes(),c=a.getHours();<?php if ($lang == "ar") { echo 'var eN=["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];for(var i=0;i<11;i++){ba=ba.toString().replace(i.toString(), eN[i]);ba=ba.toString().replace(i.toString(), eN[i]);}'; } ?>ba<10?ba="0"+ba:c!=prevLocHour&&document.location.reload(!0),timeStr=hour+":"+ba+" "+ampm,ba!=prevMin&&(clock.innerHTML=timeStr),prevMin=ba;setTimeout(updateClock,1e3)}var al=document.getElementById("al");if(al.classList.add("h"),navigator.geolocation&&(al.innerHTML='<button onclick="loc()"><?php echo __("Current Location"); ?></button>'),document.getElementById("ct")){var clock=document.getElementById("ct"),time=clock.innerHTML,timeItems=time.split(" "),ampm=timeItems[1];timeItems=timeItems[0].split(":");var prevMin=timeItems[1],hour=timeItems[0],timeStr=hour+":"+prevMin+" "+ampm;clock.innerHTML=timeStr;var t=new Date,prevLocHour=t.getHours();updateClock()}</script>
 </body>
 
 </html>
