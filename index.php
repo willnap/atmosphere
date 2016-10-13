@@ -137,8 +137,10 @@
   }
 
   // Windows error testing
-  echo var_dump(strftime('%I:%M %p', $forecast_time));
-  echo strftime('%I:%M %p', $forecast_time);
+  $f_t_t = strftime('%I:%M %p', $forecast_time);
+  date_default_timezone_set($f_t_t);
+  echo var_dump($f_t_t);
+  echo $f_t_t;
 
 ?>
 <!doctype html>
