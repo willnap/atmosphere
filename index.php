@@ -137,8 +137,8 @@
   }
 
   // Windows error testing
-  echo var_dump(strftime('%-l:%M %p', $forecast_time));
-  echo strftime('%-l:%M %p', $forecast_time);
+  echo var_dump(strftime('%I:%M %p', $forecast_time));
+  echo strftime('%I:%M %p', $forecast_time);
 
 ?>
 <!doctype html>
