@@ -145,7 +145,7 @@
   <link rel="icon" href="<?php echo "ig/fvicns/" . $favicon . ".png"; ?>" type="image/png">
   <title><?php if ($valid) { echo __("Atmosphere for ") . $location; } else { echo __("Error") . " | Atmosphere"; } ?></title>
   <style>html,body{margin:0;padding:0;overflow-x:hidden;background-color:<?php echo $back_color ?>}body{font-family:-apple-system,"Segoe UI","Roboto","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;color:#fff;text-align:center;width:100vw;max-width:100vw;min-height:100vh;padding:10px 0;background-image:linear-gradient(<?php echo $back_gradient; ?>)}<?php if ($units != null) { echo "#" . $units . "{ font-weight: bolder; }"; } ?></style>
-  <link rel="stylesheet" async type="text/css" href="stylev5.css"><?php if ($localeRTL) { echo "\n<style>#now .rgt, .dly .lft{text-align:right}.dly .rgt{text-align:left;}b{margin-right:0;margin-left:10px;min-width:4%;}.dly .r{margin-right:0;margin-left:15%}</style>\n"; } ?>
+  <link rel="stylesheet" async type="text/css" href="styleV2.css"><?php if ($localeRTL) { echo "\n<style>#now .rgt, .dly .lft{text-align:right}.dly .rgt{text-align:left;}b{margin-right:0;margin-left:10px;min-width:4%;}.dly .r{margin-right:0;margin-left:15%}</style>\n"; } ?>
 </head>
 
 <body>
