@@ -66,10 +66,10 @@
       <option value="en" <?php echo 🔘($lang, "en", false); ?>>English</option>
       <option value="ar" <?php echo 🔘($lang, "ar", false); ?>>عَرَبِيّ</option>
       <option value="pt" <?php echo 🔘($lang, "pt", false); ?>>Português</option>
-      <option value="ru" <?php echo 🔘($lang, "ru", false); ?>>русский язык</option>
-      <option value="de" <?php echo 🔘($lang, "de", false); ?>>Deutsch</option>
+      <!--option value="ru" <?php echo 🔘($lang, "ru", false); ?>>русский язык</option>
+      <option value="de" <?php echo 🔘($lang, "de", false); ?>>Deutsch</option-->
       <option value="fr" <?php echo 🔘($lang, "fr", false); ?>>Français</option>
-      <option value="tr" <?php echo 🔘($lang, "tr", false); ?>>Türkçe</option>
+      <!--option value="tr" <?php echo 🔘($lang, "tr", false); ?>>Türkçe</option>
       <option value="it" <?php echo 🔘($lang, "it", false); ?>>Italiano</option>
       <option value="pl" <?php echo 🔘($lang, "pl", false); ?>>Język Polski</option>
       <option value="uk" <?php echo 🔘($lang, "uk", false); ?>>українська мова</option>
@@ -79,7 +79,7 @@
       <option value="el" <?php echo 🔘($lang, "el", false); ?>>Ελληνικά</option>
       <option value="cs" <?php echo 🔘($lang, "cs", false); ?>>čeština</option>
       <option value="sv" <?php echo 🔘($lang, "sv", false); ?>>Svenska</option>
-      <option value="x-pig-latin" <?php echo 🔘($lang, "x-pig-latin", false); ?>>Igpay Atinlay</option>
+      <option value="x-pig-latin" <?php echo 🔘($lang, "x-pig-latin", false); ?>>Igpay Atinlay</option-->
     </select>
     <br>
     <br>
