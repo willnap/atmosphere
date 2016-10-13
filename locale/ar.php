@@ -38,6 +38,6 @@ $locale = array(
 );
 $localeRTL = true;
 $locale24 = false;
-$locale_php = "ar_AE";
+$locale_php = "ar-AE";
 $locale_geo = "ar";
 ?>
