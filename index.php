@@ -136,6 +136,10 @@
       break;
   }
 
+  // Windows error testing
+  echo var_dump(strftime('%-l:%M %p', $forecast_time));
+  echo strftime('%-l:%M %p', $forecast_time);
+
 ?>
 <!doctype html>
 <html lang="<?php echo $lang; ?>"<?php if ($localeRTL) { echo ' dir="rtl"'; } ?>>
