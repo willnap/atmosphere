@@ -137,20 +137,8 @@
   }
 
   // Windows error testing
-  $f_t_t = strftime('%I:%M %p', $forecast_time);
-  echo var_dump($f_t_t);
-  echo $f_t_t;
-  if ($locale24 or ($time == "24")) {
-    $format = str_replace("%I", "%-k", $format);
-    $format = str_replace("%l", "%-k", $format);
-    $format = str_replace("%-l", "%-k", $format);
-    $format = str_replace("%p", "", $format);
-    $format = str_replace("%P", "", $format);
-    $time = "24";
-  }
-  date_default_timezone_set($forecast_timezone);
-  $formatted_time = strftime('%I:%M %p', $forecast_time);
-  echo __($formatted_time);
+  echo formatTime($forecast_time, '%-l:%M %p');
+  echo formatTime($forecast_time, '%I:%M %p');
 
 ?>
 <!doctype html>
