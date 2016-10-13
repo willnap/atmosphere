@@ -24,6 +24,8 @@
   include 'locale/' . $lang . '.php';
   if ($locale_php != null) {
     setlocale(LC_TIME, $locale_php . ".UTF-8");
+  } else {
+    setlocale(LC_TIME, "en_US.UTF-8");
   }
   if ($locale24) {
     setcookie("time", "24", time()+31556926, "/", "." . $_SERVER[HTTP_HOST]);
