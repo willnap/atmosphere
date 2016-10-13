@@ -1,0 +1,43 @@
+<?php
+$locale = array(
+  "Location Not Found" => "Localización No Se Ha Encontrado",
+  "Hmm, the location you’re looking for can’t be found." => "La ubicación que está buscando no se puede encontrar.",
+  "Are you sure you didn’t mistype it?" => "¿Estás seguro de que no escribe mal verdad?",
+  "It's Not You, It's Us." => "No Eres Tú, Es Con Nosotros.",
+  "We’re experiencing an internal error." => "Estamos experimentando un error interno.",
+  "The site administrator has been contacted." => "El administrador del sitio ha sido contactado.",
+  "Weather for " => "El tiempo de ",
+  "Weather for Current Location" => "El Tiempo Para la Posición Actual",
+  "Not Supported" => "No Soportado",
+  "Search Error" => "Error de Búsqueda",
+  "Locating..." => "Localizando...",
+  "Powered by Dark Sky" => "Desarrollado por Dark Sky",
+  "Created by Will Napier" => "Creado por Will Napier",
+  "Source on Github" => "Fuente en Github",
+  "Chance of Rain" => "Probabilidad de Lluvia",
+  "Chance of Snow" => "Posibilidad de Nieve",
+  "Chance of Sleet" => "Posibilidad de Aguanieve",
+  "Chance of Precipitation" => "Posibilidad de Presipitacion",
+  "Sunrise" => "Amanecer",
+  "Sunset" => "Ocaso",
+  "Feels like " => "Se Siente Como ",
+  "Today" => "Hoy",
+  "Atmosphere for " => "El tiempo de ",
+  "Error" => "Error",
+  "select to change city" => "seleccione para cambiar la ciudad",
+  "Enter a Location" => "Escribe una Ubicación",
+  "Change Location" => "Cambiar Locación",
+  "Current Location" => "Ubicación Actual",
+  "Settings" => "Preferencias",
+  "Units" => "Unidades",
+  "Hour Format" => "Formato Hora",
+  "12 Hour (AM, PM)" => "12 Hora (AM, PM)",
+  "24 Hour" => "24 Hora",
+  "Language (beta)" => "Idioma (beta)",
+  "Save" => "Salvar",
+);
+$localeRTL = false;
+$locale24 = true;
+$locale_php = "es_US";
+$locale_geo = "es";
+?>
