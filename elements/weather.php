@@ -17,9 +17,9 @@
   for ($i = 0; $i < 18; $i++) {
     echo "\n    <li>";
     if ($i == 0) {
-      echo '<time id="ct">' . formatTime($forecast_time, '%-l:%M %p') . '</time> ';
+      echo '<time id="ct">' . formatTime($forecast_time, '%I:%M %p') . '</time> ';
     } else {
-      echo '<time>' . formatTime($forecast->hourly->data[$i]->time, '%-l%p') . '</time> ';
+      echo '<time>' . formatTime($forecast->hourly->data[$i]->time, '%I%p') . '</time> ';
     }
     echo rain($forecast->hourly->data[$i]->precipProbability, true);
     if ($i == 0) {
