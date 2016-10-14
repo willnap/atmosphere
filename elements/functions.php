@@ -28,7 +28,10 @@
       $format = str_replace("a", "", $format);
       $format = str_replace("A", "", $format);
     }
-    return __(strval($current_time->format($format)));
+    $return_time = __(strval($current_time->format($format)));
+    $return_time = str_replace("AM", __("AM"), $return_time);
+    $return_time = str_replace("PM", __("PM"), $return_time);
+    return $return_time;
   }
 
   function image($class, $alt, $icon, $sunrise, $sunset, $large) {
