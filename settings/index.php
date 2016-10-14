@@ -66,8 +66,8 @@
       <option value="en" <?php echo 🔘($lang, "en", false); ?>>English</option>
       <option value="ar" <?php echo 🔘($lang, "ar", false); ?>>عَرَبِيّ</option>
       <option value="pt" <?php echo 🔘($lang, "pt", false); ?>>Português</option>
-      <!--option value="ru" <?php echo 🔘($lang, "ru", false); ?>>русский язык</option>
-      <option value="de" <?php echo 🔘($lang, "de", false); ?>>Deutsch</option-->
+      <option value="ru" <?php echo 🔘($lang, "ru", false); ?>>русский язык</option>
+      <option value="de" <?php echo 🔘($lang, "de", false); ?>>Deutsch</option>
       <option value="fr" <?php echo 🔘($lang, "fr", false); ?>>Français</option>
       <!--option value="tr" <?php echo 🔘($lang, "tr", false); ?>>Türkçe</option>
       <option value="it" <?php echo 🔘($lang, "it", false); ?>>Italiano</option>
