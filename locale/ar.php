@@ -35,9 +35,18 @@ $locale = array(
   "24 Hour" => "24 ساعة",
   "Language (beta)" => "لغة (بيتا)",
   "Save" => "حفظ",
+  "Sun" => "ح",
+  "Mon" => "ن",
+  "Tue" => "ث",
+  "Wed" => "ر",
+  "Thu" => "خ",
+  "Fri" => "ج",
+  "Sat" => "س",
+  "AM" => "ص",
+  "PM" => "م",
 );
 $localeRTL = true;
 $locale24 = false;
-$locale_php = "ar-AE";
+$locale_php = "ar_AE";
 $locale_geo = "ar";
 ?>

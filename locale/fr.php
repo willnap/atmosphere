@@ -35,6 +35,15 @@ $locale = array(
   "24 Hour" => "24 Heure",
   "Language (beta)" => "Langue (beta)",
   "Save" => "Sauvegarder",
+  "Sun" => "dim.",
+  "Mon" => "lun.",
+  "Tue" => "mar.",
+  "Wed" => "mer.",
+  "Thu" => "jeu.",
+  "Fri" => "ven.",
+  "Sat" => "sam.",
+  "AM" => "",
+  "PM" => "",
 );
 $localeRTL = false;
 $locale24 = true;

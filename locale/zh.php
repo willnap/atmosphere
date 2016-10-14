@@ -35,6 +35,15 @@ $locale = array(
   "24 Hour" => "24小时",
   "Language (beta)" => "语言（测试版）",
   "Save" => "保存",
+  "Sun" => "日",
+  "Mon" => "一",
+  "Tue" => "二",
+  "Wed" => "三",
+  "Thu" => "四",
+  "Fri" => "五",
+  "Sat" => "六",
+  "AM" => "上午",
+  "PM" => "下午",
 );
 $localeRTL = false;
 $locale24 = false;
