@@ -20,18 +20,15 @@
     global $time;
     global $lang;
     global $locale24;
-    $format = str_replace("%-l", "%I", $format);
+    $current_time = new DateTime("@" . $unix);
+    $current_time->setTimeZone(new DateTimeZone($forecast_timezone));
     if ($locale24 or ($time == "24")) {
-      $format = str_replace("%I", "%-k", $format);
-      $format = str_replace("%l", "%-k", $format);
-      $format = str_replace("%-l", "%-k", $format);
-      $format = str_replace("%p", "", $format);
-      $format = str_replace("%P", "", $format);
-      $time = "24";
+      $format = str_replace("g", "H", $format);
+      $format = str_replace("h", "H", $format);
+      $format = str_replace("a", "", $format);
+      $format = str_replace("A", "", $format);
     }
-    date_default_timezone_set($forecast_timezone);
-    $formatted_time = strftime($format, $unix);
-    return __($formatted_time);
+    return strval($current_time->format($format));
   }
 
   function image($class, $alt, $icon, $sunrise, $sunset, $large) {
