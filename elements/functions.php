@@ -142,7 +142,7 @@
     }
     if ($valid) {
       echo "<li>";
-      echo '  <time>' . formatTime($time, '%I:%M %p') . '</time> ';
+      echo '  <time>' . formatTime($time, 'g:i A') . '</time> ';
       echo '  ' . rain($forecast->hourly->data[$i]->precipProbability, true);
       echo '  <img alt="' . $type . '" src="ig/wr/sm/' . $abbr_type . '.png" srcset="ig/wr/sm/' . $abbr_type . '.png? 35w, ig/wr/md/' . $abbr_type . '.png? 70w, ig/wr/' . $abbr_type . '.svg? 80w">';
       echo '  <span>' . $type . '</span>';
