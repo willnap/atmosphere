@@ -17,9 +17,9 @@
   for ($i = 0; $i < 18; $i++) {
     echo "\n    <li>";
     if ($i == 0) {
-      echo '<time id="ct">' . formatTime($forecast_time, '%I:%M %p') . '</time> ';
+      echo '<time id="ct">' . formatTime($forecast_time, 'g:i A') . '</time> ';
     } else {
-      echo '<time>' . formatTime($forecast->hourly->data[$i]->time, '%I%p') . '</time> ';
+      echo '<time>' . formatTime($forecast->hourly->data[$i]->time, 'gA') . '</time> ';
     }
     echo rain($forecast->hourly->data[$i]->precipProbability, true);
     if ($i == 0) {
@@ -37,7 +37,7 @@
   }
   echo '</ul>';
   for ($i = 1; $i < 6; $i++) {
-    echo '  <p class="dly"><span class="lft"><b>' . formatTime($forecast->daily->data[$i]->time, '%a') . '</b><span class="ld"> ' . __($forecast->daily->data[$i]->summary) . ' </span></span><span class="rgt">' . rain($forecast->daily->data[$i]->precipProbability, false) . '<span class="t"> ' . __(round($forecast->daily->data[$i]->temperatureMax)) . ' <span class="l"> ' . __(round($forecast->daily->data[$i]->temperatureMin)) . "</span></span></span></p>\n";
+    echo '  <p class="dly"><span class="lft"><b>' . formatTime($forecast->daily->data[$i]->time, 'D') . '</b><span class="ld"> ' . __($forecast->daily->data[$i]->summary) . ' </span></span><span class="rgt">' . rain($forecast->daily->data[$i]->precipProbability, false) . '<span class="t"> ' . __(round($forecast->daily->data[$i]->temperatureMax)) . ' <span class="l"> ' . __(round($forecast->daily->data[$i]->temperatureMin)) . "</span></span></span></p>\n";
   }
 ?>
   <br>
