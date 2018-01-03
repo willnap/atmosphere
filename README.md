@@ -1,5 +1,5 @@
 # Atmosphere
-A progressive weather website built with emphasis on speed, accessibility, and compatibility. [**atmosphere.li**](http://atmosphere.li)
+A progressive weather website built with emphasis on speed, accessibility, and compatibility.
 
 ## Requirements
 Atmosphere requires a server running PHP 5.6, a [Dark Sky API key](https://darksky.net/dev/), and a [Google Maps Geolocation API key](https://developers.google.com/maps/documentation/geolocation/get-api-key).
